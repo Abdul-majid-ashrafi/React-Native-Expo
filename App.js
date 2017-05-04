@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { Header } from './scr/tagsComponent'
+import { Header } from './scr/tags'
 // import { FormLabel, FormInput, Button } from 'react-native-elements'
 
 export default class App extends Component {
@@ -10,7 +10,7 @@ export default class App extends Component {
     // };
     return (
       <View>
-        <Header />
+        <Header headerText={'Albums'} />
         {/*<Text>Home page Component</Text>*/}
 
       </View>
