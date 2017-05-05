@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 
 
-export const Header = (props) => {
-    console.log(props)
-    return (
-        <View style={styles.viewStyle}>
+export class Header extends Component {
+    render() {
+        console.log(this.props)
+        return (
+            <View style={styles.viewStyle}>
 
-            <Text style={styles.textStyle}>New {props.headerText}</Text>
-        </View>
-    )
+                <Text style={styles.textStyle}>New {this.props.headerText}</Text>
+            </View>
+        )
+    }
 }
 
 const styles = {
