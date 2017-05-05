@@ -29,7 +29,7 @@ export const ListDetails = ({ album }) => {
             </CardSection>
 
             <CardSection>
-                <Button />
+                <Button onPress={() => alert(title)} />
             </CardSection>
         </Card>
     )
