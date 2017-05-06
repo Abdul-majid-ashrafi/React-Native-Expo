@@ -1,12 +1,29 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
+import firebase from 'firebase'
 import { Button, Card, CardSection, Input } from './common'
 
 export class SignupForm extends Component {
-    state = { email: '', password: '', userName: '' }
+    state = { email: 'mani@gmail.com', password: 'mani', userName: 'Majid Ashraf', error: '' }
 
     createUserAccount() {
-        console.log('this.state', this.state)
+        const { email, password, userName } = this.state
+        console.log('this.state', userName)
+        this.setState({ error: '' })
+
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            // Handle Response here
+            .then((Response) => {
+                console.log('Response', Response)
+                firebase.database().ref('/').child('nativeUser/' + Response.uid).set(this.state)
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                this.setState({ error: errorMessage })
+            })
+
     }
     render() {
         return (
@@ -40,6 +57,10 @@ export class SignupForm extends Component {
                         />
                     </CardSection >
 
+                    <CardSection>
+                        <Text style={errorStyle}>{this.state.error}</Text>
+                    </CardSection>
+
                     <CardSection />
 
                     <CardSection>
@@ -53,4 +74,8 @@ export class SignupForm extends Component {
             </View>
         )
     }
+}
+const errorStyle = {
+    fontSize: 18,
+    color: 'red'
 }
