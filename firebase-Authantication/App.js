@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as firebase from 'firebase'
 import { Header } from './src/components/common'
+import { LoginForm } from './src/components'
 
 export default class App extends React.Component {
   componentWillMount() {
@@ -18,20 +19,11 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <Header headerText={'Authantication'} />
-        <Text>Changes you make will automatically reload.</Text>
+        <LoginForm />
         {/*<Text>Shake your phone to open the developer menu.</Text>*/}
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
