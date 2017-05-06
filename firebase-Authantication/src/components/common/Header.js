@@ -8,7 +8,7 @@ export class Header extends Component {
         return (
             <View style={styles.viewStyle}>
 
-                <Text style={styles.textStyle}>New {this.props.headerText}</Text>
+                <Text style={styles.textStyle}>{this.props.headerText}</Text>
             </View>
         )
     }
