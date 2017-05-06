@@ -4,7 +4,6 @@ import { View, Text } from 'react-native'
 
 export class Header extends Component {
     render() {
-        console.log(this.props)
         return (
             <View style={styles.viewStyle}>
 

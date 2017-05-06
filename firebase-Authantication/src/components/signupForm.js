@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Button, Card, CardSection, Input } from './common'
 
-export class LoginForm extends Component {
+export class SignupForm extends Component {
     state = { email: '', password: '', userName: '' }
 
-    onPressButton() {
+    createUserAccount() {
         console.log('this.state', this.state)
     }
     render() {
@@ -44,8 +44,8 @@ export class LoginForm extends Component {
 
                     <CardSection>
 
-                        <Button onPress={this.onPressButton.bind(this)}>
-                            Login
+                        <Button onPress={this.createUserAccount.bind(this)}>
+                            Submit
                         </Button >
                     </CardSection>
 
