@@ -2,9 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as firebase from 'firebase'
 import { Header } from './src/components/common'
-import { SignupForm,LoginForm } from './src/components'
+import { SignupForm, LoginForm } from './src/components'
 
 export default class App extends React.Component {
+  state = { loggedIn: false }
   componentWillMount() {
     // Initialize Firebase
     var config = {
@@ -16,6 +17,14 @@ export default class App extends React.Component {
       messagingSenderId: "411422279834"
     };
     firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ loggedIn: true })
+      } else {
+        this.setState({ loggedIn: false })
+      }
+    })
   }
   render() {
     return (
