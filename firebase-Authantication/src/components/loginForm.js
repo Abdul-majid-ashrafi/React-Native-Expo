@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
+import firebase from 'firebase'
 import { Button, Card, CardSection, Input } from './common'
 
 export class LoginForm extends Component {
-    state = { email: '', password: '', userName: '' }
+    state = { email: 'user@gmail.com', password: 'mani112', error: '' }
 
-    onPressButton() {
-        console.log('this.state', this.state)
+    login() {
+        const { email, password } = this.state
+          this.setState({ error: '' })
+        firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
+            console.log(user)
+        })
+            .catch((error) => {
+                // Handle Errors here.
+                var errorMessage = error.message;
+                this.setState({ error: errorMessage })
+            })
     }
     render() {
         return (
             <View>
                 <Card>
-                    <CardSection>
-                        <Input
-                            placeholder="your full name"
-                            label="User Name"
-                            value={this.state.userName}
-                            onChangeText={userName => this.setState({ userName })}
-                        />
-                    </CardSection>
-
                     <CardSection>
                         <Input
                             placeholder="user@gmail.com"
@@ -33,18 +34,21 @@ export class LoginForm extends Component {
                     <CardSection>
                         <Input
                             secureTextEntry
-                            placeholder="******"
                             label="Password"
                             value={this.state.password}
                             onChangeText={password => this.setState({ password })}
                         />
                     </CardSection >
 
+
+                    <CardSection>
+                        <Text style={{ color: 'red' }}>{this.state.error}</Text>
+                    </CardSection>
                     <CardSection />
 
                     <CardSection>
 
-                        <Button onPress={this.onPressButton.bind(this)}>
+                        <Button onPress={this.login.bind(this)}>
                             Login
                         </Button >
                     </CardSection>
