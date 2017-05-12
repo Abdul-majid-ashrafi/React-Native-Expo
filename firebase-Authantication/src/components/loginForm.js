@@ -1,23 +1,39 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import firebase from 'firebase'
-import { Button, Card, CardSection, Input } from './common'
+import { Button, Card, CardSection, Input, Spinner } from './common'
 
 export class LoginForm extends Component {
-    state = { email: 'user@gmail.com', password: 'mani112', error: '' }
+    state = { email: 'user@gmail.com', password: 'mani12', error: '', loading: false }
 
     login() {
         const { email, password } = this.state
-          this.setState({ error: '' })
+        this.setState({ error: '', loading: true })
         firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
+            this.onLoginSuccess()
             console.log(user)
         })
             .catch((error) => {
                 // Handle Errors here.
                 var errorMessage = error.message;
-                this.setState({ error: errorMessage })
+                this.setState({ error: errorMessage, loading: false })
             })
     }
+
+    onLoginSuccess() {
+        this.setState({ email: "", password: '', loading: false, error: '' })
+    }
+    renderButton() {
+        if (this.state.loading) {
+            return <Spinner />
+        }
+        else {
+            return (<Button onPress={this.login.bind(this)}>
+                Login
+                  </Button >)
+        }
+    }
+
     render() {
         return (
             <View>
@@ -44,13 +60,12 @@ export class LoginForm extends Component {
                     <CardSection>
                         <Text style={{ color: 'red' }}>{this.state.error}</Text>
                     </CardSection>
-                    <CardSection />
 
                     <CardSection>
-
-                        <Button onPress={this.login.bind(this)}>
+                        {this.renderButton()}
+                        {/*<Button onPress={this.login.bind(this)}>
                             Login
-                        </Button >
+                        </Button >*/}
                     </CardSection>
 
                 </Card>

@@ -12,5 +12,5 @@ export const Spinner = ({ size }) => {
 const spinnerStyle = {
     flex: 1,
     justifyContent: 'center',
-    alignItem: 'center'
+    // alignItem: 'center'
 }
