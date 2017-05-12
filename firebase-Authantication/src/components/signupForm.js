@@ -4,7 +4,7 @@ import firebase from 'firebase'
 import { Button, Card, CardSection, Input } from './common'
 
 export class SignupForm extends Component {
-    state = { email: 'mani@gmail.com', password: 'mani', userName: 'Majid Ashraf', error: '' }
+    state = { email: 'user@gmail.com', password: 'mani', userName: 'Majid Ashraf', error: '' }
 
     createUserAccount() {
         const { email, password, userName } = this.state
