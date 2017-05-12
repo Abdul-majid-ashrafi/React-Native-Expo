@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as firebase from 'firebase'
-import { Header } from './src/components/common'
+import { Header, Button, Spinner, Card, CardSection } from './src/components/common'
 import { SignupForm, LoginForm } from './src/components'
 
 export default class App extends React.Component {
-  state = { loggedIn: false }
+  state = { loggedIn: null }
   componentWillMount() {
     // Initialize Firebase
     var config = {
@@ -26,11 +26,31 @@ export default class App extends React.Component {
       }
     })
   }
+
+  renderContent() {
+    switch (this.state.loggedIn) {
+      case true:
+        return <Button onPress={()=> firebase.auth().signOut()}>Log Out</Button>;
+      case false:
+        return <LoginForm />;
+      default:
+        return <Spinner />
+    }
+  }
+
   render() {
     return (
       <View>
         <Header headerText={'Authantication'} />
-        <LoginForm />
+        <Card>
+          {/*<CardSection>*/}
+            {/*<Button>*/}
+        {this.renderContent()}
+              {/*Login*/}
+            {/*</Button>*/}
+          {/*</CardSection>*/}
+        </Card>
+        {/*<LoginForm />*/}
         {/*<Text>Shake your phone to open the developer menu.</Text>*/}
       </View>
     );
