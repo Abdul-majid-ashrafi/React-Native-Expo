@@ -30,7 +30,8 @@ export default class App extends React.Component {
   renderContent() {
     switch (this.state.loggedIn) {
       case true:
-        return <Button onPress={()=> firebase.auth().signOut()}>Log Out</Button>;
+        return (
+          <CardSection><Button onPress={() => firebase.auth().signOut()}>Log Out</Button></CardSection>);
       case false:
         return <LoginForm />;
       default:
@@ -42,17 +43,8 @@ export default class App extends React.Component {
     return (
       <View>
         <Header headerText={'Authantication'} />
-        <Card>
-          {/*<CardSection>*/}
-            {/*<Button>*/}
         {this.renderContent()}
-              {/*Login*/}
-            {/*</Button>*/}
-          {/*</CardSection>*/}
-        </Card>
-        {/*<LoginForm />*/}
-        {/*<Text>Shake your phone to open the developer menu.</Text>*/}
-      </View>
+      </View >
     );
   }
 }
